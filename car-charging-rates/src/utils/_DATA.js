@@ -26,7 +26,7 @@ let rateOptions = {
 
 export function getRateOptions() {// async function with timeout to get rate options and calculate homeLoads
     return new Promise((res, rej) => {
-        setTimeout(() => res(...rateOptions), 1500)
+        setTimeout(() => res({...rateOptions}), 1500)
     })
 }
 
