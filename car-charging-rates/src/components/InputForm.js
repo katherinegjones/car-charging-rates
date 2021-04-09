@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import Slider from 'react-range-slider'
+import Slider from 'react-rangeslider'
 
 export default class InputForm extends Component {
     state = {
