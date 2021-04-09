@@ -23,7 +23,12 @@ export default class InputForm extends Component {
         }))
     }
 
+    handleChangeMiles = value => this.setState(() => ({
+        monthlyMiles: value
+    }))
+
     render(){
+        const { chargeRate, monthlyMiles, hours } = this.state 
         const formatMiles = value => value + 'miles/month'
         return(
             <div className='input-form-main'>
@@ -39,9 +44,10 @@ export default class InputForm extends Component {
                     min={100}
                     max={5000}
                     step={100}
-                    value={this.state.monthlyMiles}
-                    handleLabel={this.state.monthlyMiles}
+                    value={monthlyMiles}
+                    handleLabel={monthlyMiles}
                     format={formatMiles}
+                    onChange={this.handleChangeMiles}
                 />
                 <p>{formatMiles}</p>
                 <ChargingHours handleSelect={this.handleSelectHour}/>

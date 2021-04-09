@@ -1,14 +1,12 @@
 import { Component } from 'react'
 
 export default class ChargingHours extends Component {
-    onSelect = (e) => {
+    onSelect = (e, isPM) => {
         e.preventDefault()
 
-        const hour = e.target.id + 1
+        const hour = isPM === true ? e.target.id + 12 : e.target.id
 
-        const adjusted = e.target.innerHTML.includes('PM') ? hour + 12 : hour 
-
-        this.props.handleSelect(adjusted)
+        this.props.handleSelect(hour)
     }
      render(){
         return(
@@ -16,7 +14,7 @@ export default class ChargingHours extends Component {
                 <div className='am-hours'>
                     {[...Array(12).keys()].map((key) => {
                         return (
-                        <button id={key} onClick={this.onSelect}>
+                        <button id={key} onClick={(event) => this.onSelect(event, false)}>
                             {key > 0 
                             ? key < 11 
                             ? `${key}AM - ${key + 1}AM`
@@ -30,7 +28,7 @@ export default class ChargingHours extends Component {
                 <div className='pm-hours'>
                     {[...Array(12).keys()].map((key) => {
                         return (
-                        <button id={key} onClick={this.onSelect}>
+                        <button id={key} onClick={(event) => this.onSelect(event, true)}>
                             {key > 0 
                             ? key < 11 
                             ? `${key}PM - ${key + 1}PM`
