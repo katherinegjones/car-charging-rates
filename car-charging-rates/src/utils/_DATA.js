@@ -24,10 +24,32 @@ let rateOptions = {
     }
 } 
 
-export function getRateOptions() {// async function with timeout to get rate options and calculate homeLoads
+export function getRateOptions() { // async function with timeout to get rate options and calculate homeLoads
     return new Promise((res, rej) => {
         setTimeout(() => res({...rateOptions}), 1500)
     })
+}
+
+export function calcResults(rate, mileage, hours){
+    return new Promise((res, rej) => {
+        const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
+        const ratio = yearlyHoursNeeded/(hours * 365) //ratio of kwh needed vs. actual hours charging
+        const yearlyCost = rateOptions[rate].evLoad(hours) * ratio
+        const altCosts = Object.keys(rateOptions).filter((option) => option !== rate).map((option) => {
+            const obj = {}
+            obj[option] = option.evLoad(hours) * ratio
+            return obj
+        })
+            
+        setTimeout(() => {
+        const costOptions = {
+            yearlyCost,
+            altCosts
+        }
+        res(costOptions)
+        }, 1000)
+    })
+
 }
 
 export function addRateOption(description, homeLoadReducer, evLoadReducer){ //this function is not used currently; would need to add separate component with form

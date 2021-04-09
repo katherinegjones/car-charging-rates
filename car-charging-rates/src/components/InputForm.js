@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Slider from 'react-rangeslider'
 import ChargingHours from './ChargingHours'
+import { Link } from 'react-router-dom'
 
 export default class InputForm extends Component {
     state = {
@@ -51,6 +52,9 @@ export default class InputForm extends Component {
                 />
                 <p>{formatMiles}</p>
                 <ChargingHours handleSelect={this.handleSelectHour}/>
+                <Link to='/results'>
+                    <button disabled={chargeRate === '' | hours.length === 0}>Submit</button>
+                </Link>
 
             </div>
         )
