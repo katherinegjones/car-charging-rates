@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import Slider from 'react-rangeslider'
+import ChargingHours from './ChargingHours'
 
 export default class InputForm extends Component {
     state = {
@@ -28,6 +29,9 @@ export default class InputForm extends Component {
                     handleLabel={this.state.monthlyMiles}
                     format={formatMiles}
                 />
+                <p>{formatMiles}</p>
+                <ChargingHours />
+
             </div>
         )
     }
