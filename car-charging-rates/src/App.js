@@ -8,6 +8,7 @@ class App extends Component {
   componentDidMount(){
     getRateOptions()
     .then((rateOptions) =>{
+      console.log(rateOptions)
       this.setState(() => ({
         rateOptions
       }))
@@ -17,7 +18,7 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-          <InputForm rateOptions={this.state.rateOptions}/>   
+          <InputForm rateOptions={this.state ? this.state.rateOptions : null}/>   
       </div>
     );
     }
