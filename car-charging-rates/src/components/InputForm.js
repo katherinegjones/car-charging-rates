@@ -19,9 +19,7 @@ export default class InputForm extends Component {
                 <div>
                     <h3>Rate B: $0.20/kWh peak hours (12pm - 6pm), $0.08 offpeak</h3>
                 </div>
-                <input
-                    placeholder='Please select average monthly miles'
-                ></input>
+                <h2>What is your average monthly miles driven?</h2>
                 <Slider 
                     min={100}
                     max={5000}
