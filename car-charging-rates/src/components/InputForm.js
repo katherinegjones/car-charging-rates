@@ -9,7 +9,7 @@ export default class InputForm extends Component {
 
 
     render(){
-        const formatMiles = this.state.monthlyMiles + 'miles/month'
+        const formatMiles = value => value + 'miles/month'
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
