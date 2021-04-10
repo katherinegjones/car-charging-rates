@@ -5,20 +5,20 @@ let rateOptions = {
         name: 'Rate A',
         description: 'flat rate of $0.15/kWh',
         homeLoad: 1350.56, //pre-calculated sum of provided home load * rate of $0.15; could be changed to function to input different home loads
-        evLoad: hours => hours.reduce((accum, curr) => accum + curr, 0) * .15 
+        evDaily: hours => hours.length * .15 
     },
     rateB: {
         name: 'Rate B',
         description: '$0.20/kWh peak hours (12pm - 6pm), $0.08 offpeak',
-        homeLoad: hourly_rates.reduce((accum, curr, ind) => {// could be changed so home load values are not hard coded, similar to evLoads function
+        homeLoad: hourly_rates.reduce((accum, curr, ind) => {// could be changed so home load values are not hard coded, similar to evDailys function
             const modded = (ind + 1) % 24
-            const peak = modded > 18 && modded <= 24 
+            const peak = modded >= 18 && modded < 24 
             const cost = peak ? curr * .2 : curr * .08
             return cost + accum 
         }, 0),
-        evLoad: hours => hours.reduce((accum, curr) => {
-            const peak = curr > 18 && curr <= 24
-            const cost = peak ? curr * .2 : curr * .08
+        evDaily: hours => hours.reduce((accum, curr) => { 
+            const peak = curr >= 18 && curr < 24
+            const cost = peak ?  .2 : .08
             return cost + accum
         }, 0)  
     }
@@ -46,7 +46,7 @@ function formatRateOption(option) {
         name: `Rate ${letterId}`,
         description: option.description,
         homeLoad: option.homeLoad(hourly_rates),
-        evLoad: option.evLoad
+        evDaily: option.evDaily
     }
 }
 
@@ -72,14 +72,14 @@ export function addRateOption(info){ //this function is not used currently; woul
 export function calcResults({rate, mileage, hours}){
     return new Promise((res, rej) => {
         const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
-        const ratio = yearlyHoursNeeded/(hours * 365) //ratio of kwh needed vs. actual hours charging
-        const yearlyEv = {[rate]: rateOptions[rate].evLoad(hours) * ratio}
+        const daysNeeded = yearlyHoursNeeded/(hours.length) //num days customer needs to follow charging schedule each year
+        const yearlyEv = {[rate]: rateOptions[rate].evDaily(hours) * daysNeeded}
         const yearlyHome = {[rate]: rateOptions[rate].homeLoad}
         const altKeys = Object.keys(rateOptions).filter((option) => option !== rate)
         let altEvs = {}
         let altHomes = {}
         altKeys.forEach((key) => {
-            altEvs[key] = rateOptions[key].evLoad(hours) * ratio
+            altEvs[key] = rateOptions[key].evDaily(hours) * daysNeeded
             altHomes[key] = rateOptions[key].homeLoad
         })
         setTimeout(() => {
