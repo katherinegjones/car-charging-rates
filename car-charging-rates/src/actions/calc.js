@@ -14,8 +14,8 @@ export function handleCalcResults({rate, mileage, hours}) {
     return (dispatch) => {
         dispatch(showLoading)
         return(calcResults({rate, mileage, hours}))
-        .then((results) => {
-            dispatch(calcRates(results))
+        .then(({yearlyEv, altEvs, yearlyHome, altHome}) => {
+            dispatch(calcRates({yearlyEv, altEvs, yearlyHome, altHome}))
             dispatch(hideLoading())
         })
     }

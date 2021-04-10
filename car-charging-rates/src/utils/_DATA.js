@@ -45,10 +45,10 @@ export function calcResults({rate, mileage, hours}){
         })
         setTimeout(() => {
         const calcs = {
-            yearlyEv: yearlyEv,
-            altEvs: altEvs,
-            yearlyHome: yearlyHome,
-            altHomes: altHomes
+            yearlyEv,
+            altEvs,
+            yearlyHome,
+            altHomes,
         }
         res(calcs)
         }, 1000)
