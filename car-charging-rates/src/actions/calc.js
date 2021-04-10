@@ -1,23 +1,9 @@
-import { calcResults, getCalc } from '../utils/_DATA'
+import { calcResults } from '../utils/_DATA'
 import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const CALC_RATES = 'CALC_RATES'
-export const RECEIVE_CALC = 'RECEIVE_CALC'
 
-function receiveCalc(calc) {
-    return {
-        type: RECEIVE_CALC,
-        calc
-    }
-}
 
-export function handleGetCalc() {
-    return (dispatch) => {
-        dispatch(showLoading())
-        return getCalc()
-        .then((results) => receiveCalc(results))
-    }
-}
 function calcRates(calc) {
     return {
         type: CALC_RATES,

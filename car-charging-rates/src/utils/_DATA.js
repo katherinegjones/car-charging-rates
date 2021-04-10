@@ -15,7 +15,7 @@ let rateOptions = {
             const peak = modded > 18 && modded <= 24 
             const cost = peak ? curr * .2 : curr * .08
             return cost + accum 
-        }, 0).toFixed(2),
+        }, 0),
         evLoad: hours => hours.reduce((accum, curr) => {
             const peak = curr > 18 && curr <= 24
             const cost = peak ? curr * .2 : curr * .08
@@ -68,11 +68,6 @@ export function addRateOption(info){ //this function is not used currently; woul
 
 }
 
-export function getCalc() {
-    return new Promise((res, rej) => {
-        setTimeout(() => res(calc), 1000)
-    })
-}
 
 export function calcResults({rate, mileage, hours}){
     return new Promise((res, rej) => {

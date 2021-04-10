@@ -1,7 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { CanvasJSChart } from 'canvasjs-react-charts'
-import { getCalc } from '../utils/_DATA'
 
 class RateCompare extends Component {
     
@@ -20,6 +19,8 @@ class RateCompare extends Component {
                 y: calc.altEvs[key], label: key
             }
         }).concat({y: Object.values(calc.yearlyEv)[0], label: `${Object.keys(calc.yearlyEv)[0]}(Your chosen rate)`})
+
+        console.log(formattedHomeData, formattedEvData)
         const options = {
             title: {
                 text: "Yearly Costs Compared"
