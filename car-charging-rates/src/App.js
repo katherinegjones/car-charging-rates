@@ -17,7 +17,9 @@ class App extends Component {
     const loadingStyle = {
       zIndex: '1',
       height: '10px',
-      background: 'linear-gradient(to right, #0066cc 0%, #00ffff 100%)'
+      background: 'linear-gradient(to right, #0066cc 0%, #00ffff 100%)',
+      borderRadiusTopRight: '5px',
+      borderRadiusBottomRight: '5px'
   }
     return (
       <Router>
