@@ -4,9 +4,7 @@ import { CanvasJSChart } from 'canvasjs-react-charts'
 import { getCalc } from '../utils/_DATA'
 
 class RateCompare extends Component {
-    componentDidMount(){
-        this.props.dispatch(getCalc())
-    }
+    
 
     render() {
         const { calc } = this.props
