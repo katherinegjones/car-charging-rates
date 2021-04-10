@@ -32,7 +32,7 @@ class RateCompare extends Component {
 
         const cost = yearlyEv + yearlyHome
 
-        console.log("Total costs: ", altTotals)
+        console.log("Cheapest alternate cost: ", minAltCost)
 
         const options = {
             title: {
