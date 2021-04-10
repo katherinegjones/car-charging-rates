@@ -50,7 +50,7 @@ class InputForm extends Component {
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
-                {Object.keys(rateOptions).map((option) => {
+                {/*{Object.keys(rateOptions).map((option) => {
                     return (
                         <div 
                         key={option} 
@@ -63,14 +63,14 @@ class InputForm extends Component {
 
                         </div>
                         )
-                })}
-                {/*
+                })}*/}
+                
                 <div className='rate-selection'>
                     <h3>Rate A: $0.15/kWh</h3>
                 </div>
                 <div className='rate-selection'>
                     <h3>Rate B: $0.20/kWh peak hours (12pm - 6pm), $0.08 offpeak</h3>
-                </div>*/}
+                </div>
                 <h2>What is your average monthly miles driven?</h2>
                 <Slider 
                     min={100}
