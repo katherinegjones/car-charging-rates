@@ -16,7 +16,7 @@ class InputForm extends Component {
 
     handleSelectRate = (e) =>{ 
         e.preventDefault()
-            //console.log("Rate selected: ", e.currentTarget.id)
+            console.log("Rate selected: ", e.currentTarget.id)
             this.setState(() => ({
                 rateOption: e.target.id
             }))
@@ -24,7 +24,6 @@ class InputForm extends Component {
     
 
     handleSelectHour = (hour) => {
-        console.log("Hour selected: ", hour)
         this.setState((curState) => ({
             hours: curState.hours.concat(hour)
         }))
