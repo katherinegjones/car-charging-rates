@@ -5,7 +5,7 @@ export const ADD_RATE = 'ADD_RATE'
 export const RECEIVE_RATES = 'RECEIVE_RATES'
 
 function receiveRates(rateOptions) {
-    console.log("logging results before passing to action")
+    console.log("logging results before passing to action", rateOptions)
     return {
         type: RECEIVE_RATES,
         rateOptions
