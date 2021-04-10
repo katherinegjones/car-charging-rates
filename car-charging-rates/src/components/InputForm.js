@@ -34,12 +34,12 @@ class InputForm extends Component {
         monthlyMiles: value
     }))
 
-    onSelect = (e) => {
+    onSubmit = (e) => {
         e.preventDefault()
 
         const { rateOption, monthlyMiles, hours } = this.state
 
-        handleCalcResults({rate: rateOption, mileage: monthlyMiles, hours})
+        this.props.dispatch(handleCalcResults({rate: rateOption, mileage: monthlyMiles, hours}))
         this.setState(() => ({
             toResults: true
         }))
@@ -73,18 +73,20 @@ class InputForm extends Component {
                 })}
                 
                 <h2>What is your average monthly miles driven?</h2>
-                <Slider 
-                    min={100}
-                    max={5000}
-                    step={100}
-                    value={monthlyMiles}
-                    handleLabel={monthlyMiles.toString()}
-                    format={formatMiles}
-                    onChange={this.handleChangeMiles}
-                />
+                <div style={{width: '80%'}}>
+                    <Slider 
+                        min={100}
+                        max={5000}
+                        step={100}
+                        value={monthlyMiles}
+                        handleLabel={monthlyMiles.toString()}
+                        format={formatMiles}
+                        onChange={this.handleChangeMiles}
+                    />
+                </div>
                 <p>{formatMiles(monthlyMiles)}</p>
                 <ChargingHours handleSelect={this.handleSelectHour}/>
-                    <button disabled={rateOption === '' | hours.length === 0}>Submit</button>
+                    <button disabled={rateOption === '' | hours.length === 0} onClick={this.onSubmit}>Submit</button>
 
             </div>
         )
