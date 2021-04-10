@@ -37,31 +37,7 @@ export function getRateOptions() { // async function with timeout to get rate op
     })
 }
 
-export function calcResults({rate, mileage, hours}){
-    return new Promise((res, rej) => {
-        const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
-        const ratio = yearlyHoursNeeded/(hours * 365) //ratio of kwh needed vs. actual hours charging
-        const yearlyEv = {[rate]: rateOptions[rate].evLoad(hours) * ratio}
-        const yearlyHome = {[rate]: rateOptions[rate].homeLoad}
-        const altKeys = Object.keys(rateOptions).filter((option) => option !== rate)
-        let altEvs = {}
-        let altHomes = {}
-        altKeys.forEach((key) => {
-            altEvs[key] = rateOptions[key].evLoad(hours) * ratio
-            altHomes[key] = rateOptions[key].homeLoad
-        })
-        setTimeout(() => {
-        calc = {
-            yearlyEv: yearlyEv,
-            altEvs: altEvs,
-            yearlyHome: yearlyHome,
-            altHomes: altHomes,
-        }
-        res(calc)
-        }, 1000)
-    })
 
-}
 
 const letterId = String.fromCharCode(Object.keys(rateOptions).length + 65)
 
@@ -89,5 +65,37 @@ export function addRateOption(info){ //this function is not used currently; woul
 })
 
 
+
+}
+
+export function getCalc() {
+    return new Promise((res, rej) => {
+        setTimeout(() => res(calc), 1000)
+    })
+}
+
+export function calcResults({rate, mileage, hours}){
+    return new Promise((res, rej) => {
+        const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
+        const ratio = yearlyHoursNeeded/(hours * 365) //ratio of kwh needed vs. actual hours charging
+        const yearlyEv = {[rate]: rateOptions[rate].evLoad(hours) * ratio}
+        const yearlyHome = {[rate]: rateOptions[rate].homeLoad}
+        const altKeys = Object.keys(rateOptions).filter((option) => option !== rate)
+        let altEvs = {}
+        let altHomes = {}
+        altKeys.forEach((key) => {
+            altEvs[key] = rateOptions[key].evLoad(hours) * ratio
+            altHomes[key] = rateOptions[key].homeLoad
+        })
+        setTimeout(() => {
+        calc = {
+            yearlyEv: yearlyEv,
+            altEvs: altEvs,
+            yearlyHome: yearlyHome,
+            altHomes: altHomes,
+        }
+        res(calc)
+        }, 1000)
+    })
 
 }

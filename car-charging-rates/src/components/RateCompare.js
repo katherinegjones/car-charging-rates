@@ -1,8 +1,13 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { CanvasJSChart } from 'canvasjs-react-charts'
+import { getCalc } from '../utils/_DATA'
 
 class RateCompare extends Component {
+    componentDidMount(){
+        this.props.dispatch(getCalc())
+    }
+
     render() {
         const { calc } = this.props
         const formattedHomeData = Object.keys(calc.altHomes).map((key) => {
@@ -41,7 +46,10 @@ class RateCompare extends Component {
         }
         return(
             <div>
-                <CanvasJSChart options={options}/>
+                {this.props.loading === true
+                ? null
+                : <CanvasJSChart options={options}/>
+                }   
             </div>
         )
     }
@@ -49,7 +57,8 @@ class RateCompare extends Component {
 
 function mapStateToProps({ calc }){
     return {
-        calc
+        calc,
+        loading: Object.keys(calc).length === 0
     }
 }
 
