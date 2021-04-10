@@ -18,7 +18,7 @@ class InputForm extends Component {
         if (e.target.tagName === 'H3'){
             //console.log("Rate selected: ", e.currentTarget.id)
             this.setState(() => ({
-                rateOption: e.currentTarget.id
+                rateOption: e.target.id
             }))
         }
     }
@@ -59,16 +59,16 @@ class InputForm extends Component {
                 <h2>Please select your current electrical rate:</h2>
                 {Object.keys(rates).map((option) => {
                     return (
-                        <div 
+                        <button 
                         key={option} 
                         id={option} 
                         className='rate-selection' 
                         onClick={this.handleSelectRate}
                         style={rateOption === option ? styleSelected : styleUnselect}
                         >
-                            <h3>{`${rates[option].name}: ${rates[option].description}`}</h3>
+                            {`${rates[option].name}: ${rates[option].description}`}
 
-                        </div>
+                        </button>
                         )
                 })}
                 
