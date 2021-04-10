@@ -1,12 +1,14 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Slider from 'react-rangeslider'
 import ChargingHours from './ChargingHours'
-//import 'react-range-slider/lib/index.css'
-import { Link } from 'react-router-dom'
+import { handleCalcResults } from '../actions/calc'
 
-export default class InputForm extends Component {
+
+class InputForm extends Component {
     state = {
-        chargeRate: '',
+        rateOption: '',
         monthlyMiles: 1000,
         hours: []
     }
@@ -14,12 +16,13 @@ export default class InputForm extends Component {
     handleSelectRate = (e) => {
         if (e.target.tagName === 'H3'){
             this.setState(() => ({
-                chargeRate: e.target.innerHTML[5]
+                rateOption: e.target.id
             }))
         }
     }
 
     handleSelectHour = (hour) => {
+        console.log("Hour selected: ", hour)
         this.setState((curState) => ({
             hours: curState.hours.concat(hour)
         }))
@@ -29,19 +32,36 @@ export default class InputForm extends Component {
         monthlyMiles: value
     }))
 
+    onSelect = (e) => {
+        e.preventDefault()
+
+        const { rateOption, monthlyMiles, hours } = this.state
+
+        handleCalcResults({rate: rateOption, mileage: monthlyMiles, hours})
+    }
+
     render(){
-        const { chargeRate, monthlyMiles, hours } = this.state 
+        const { rateOption, monthlyMiles, hours } = this.state
+        const { rateOptions } = this.props 
         const formatMiles = value => value + 'miles/month'
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
+                {Object.keys(rateOptions).map((option) => {
+                    return (
+                        <div key={option} id={option} className='rate-selection' onClick={this.handleSelectRate}>
+                            <h3>{`${rateOptions[option].name}: ${rateOptions[option].description}`}</h3>
 
+                        </div>
+                        )
+                })}
+                {/*
                 <div className='rate-selection'>
                     <h3>Rate A: $0.15/kWh</h3>
                 </div>
                 <div className='rate-selection'>
                     <h3>Rate B: $0.20/kWh peak hours (12pm - 6pm), $0.08 offpeak</h3>
-                </div>
+                </div>*/}
                 <h2>What is your average monthly miles driven?</h2>
                 <Slider 
                     min={100}
@@ -55,10 +75,18 @@ export default class InputForm extends Component {
                 <p>{formatMiles(monthlyMiles)}</p>
                 <ChargingHours handleSelect={this.handleSelectHour}/>
                 <Link to='/results'>
-                    <button disabled={chargeRate === '' | hours.length === 0}>Submit</button>
+                    <button disabled={rateOption === '' | hours.length === 0}>Submit</button>
                 </Link>
 
             </div>
         )
     }
 }
+
+function mapStateToProps({ rateOptions }) {
+    return{
+        rateOptions
+    }
+}
+
+export default connect()(InputForm)

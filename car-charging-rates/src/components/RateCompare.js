@@ -1,7 +1,8 @@
 import { Component } from 'react'
+import { connect } from 'react-redux'
 import { CanvasJSChart } from 'canvasjs-react-charts'
 
-export default class RateCompare extends Component {
+class RateCompare extends Component {
     render() {
         const { calcs } = this.props
         const formattedHomeData = Object.keys(calcs.altHomes).map((key) => {
@@ -45,3 +46,11 @@ export default class RateCompare extends Component {
         )
     }
 }
+
+function mapStateToProps({ calcs }){
+    return {
+        calcs
+    }
+}
+
+export default connect(mapStateToProps)(RateCompare)

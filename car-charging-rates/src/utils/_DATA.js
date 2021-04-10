@@ -30,7 +30,7 @@ export function getRateOptions() { // async function with timeout to get rate op
     })
 }
 
-export function calcResults(rate, mileage, hours){
+export function calcResults({rate, mileage, hours}){
     return new Promise((res, rej) => {
         const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
         const ratio = yearlyHoursNeeded/(hours * 365) //ratio of kwh needed vs. actual hours charging
@@ -56,20 +56,26 @@ export function calcResults(rate, mileage, hours){
 
 }
 
-export function addRateOption(description, homeLoadReducer, evLoadReducer){ //this function is not used currently; would need to add separate component with form
+const letterId = String.fromCharCode(Object.keys(rateOptions).length + 65)
+
+function formatRateOption(option) {
+    return {
+        name: `Rate ${letterId}`,
+        description: option.description,
+        homeLoad: option.homeLoad(hourly_rates),
+        evLoad: option.evLoad
+    }
+}
+
+
+export function addRateOption(info){ //this function is not used currently; would need to add separate component with form
     return new Promise((res, rej) => {
-        const next = Object.keys(rateOptions).length
-        const letter = String.fromCharCode(next + 65)
-        const optionId = `rate${letter}`
+        const optionId = `rate${letterId}`
+        const formattedOption = formatRateOption(info)
         setTimeout(() => {
             rateOptions =  {
             ...rateOptions,
-            [optionId]: {
-                name: `Rate ${letter}`,
-                description: description,
-                homeLoad: homeLoadReducer(hourly_rates),
-                evLoad: evLoadReducer
-            }
+            [optionId]: formattedOption
         }
         res(rateOptions)
     }, 1000)
