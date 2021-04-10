@@ -35,7 +35,7 @@ class App extends Component {
 
 function mapStateToProps({ rateOptions}) {
   return {
-    loading: rateOptions === null
+    loading: rateOptions === 'undefined'
   }
 }
 export default connect(mapStateToProps)(App);
