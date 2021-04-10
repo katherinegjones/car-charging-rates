@@ -7,7 +7,6 @@ class RateCompare extends Component {
 
     render() {
         const { calc } = this.props
-        console.log("Calc object upon loading results: ", calc)
         const { altEvs, altHomes, yearlyEv, yearlyHome } = calc
         const formattedHomeData = Object.keys(altHomes).map((key) => {
             return {
@@ -27,11 +26,13 @@ class RateCompare extends Component {
             altTotals[key] = altHomes[key] + altEvs[key]
         })
 
-                                                                                                                          
+                                                                                                                         
         const minAltCost = Math.min(...Object.values(altTotals))
         const cheapestAltRate = Object.keys(altTotals).find((key) => altTotals[key] === minAltCost)
 
         const cost = yearlyEv + yearlyHome
+
+        console.log("Total costs: ", altTotals)
 
         const options = {
             title: {
