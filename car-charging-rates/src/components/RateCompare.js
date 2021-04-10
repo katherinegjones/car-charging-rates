@@ -30,14 +30,14 @@ class RateCompare extends Component {
                 type: "stackedColumn",
                 legendText: "Yearly Home Load",
                 showInLegend: true,
-                dataPoints: {formattedHomeData}
+                dataPoints: formattedHomeData
                 
             },
                 {
                 type: "stackedColumn",
                 legendText: "Yearly Ev Load",
                 showInLegend: true,
-                dataPoints: {formattedEvData}
+                dataPoints: formattedEvData
             }]
 
         }
