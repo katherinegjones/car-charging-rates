@@ -24,6 +24,13 @@ let rateOptions = {
     }
 } 
 
+let calc = {
+    yearlyEv: 0,
+    altEvs: [],
+    yearlyHome: 0,
+    altHomes: []
+}
+
 export function getRateOptions() { // async function with timeout to get rate options and calculate homeLoads
     return new Promise((res, rej) => {
         setTimeout(() => res({...rateOptions}), 1500)
@@ -44,13 +51,13 @@ export function calcResults({rate, mileage, hours}){
             altHomes[key] = rateOptions[key].homeLoad
         })
         setTimeout(() => {
-        const calcs = {
-            yearlyEv,
-            altEvs,
-            yearlyHome,
-            altHomes,
+        calc = {
+            yearlyEv: yearlyEv,
+            altEvs: altEvs,
+            yearlyHome: yearlyHome,
+            altHomes: altHomes,
         }
-        res(calcs)
+        res(calc)
         }, 1000)
     })
 

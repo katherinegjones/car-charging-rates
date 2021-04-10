@@ -3,13 +3,10 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const CALC_RATES = 'CALC_RATES'
 
-function calcRates({ yearlyEv, altEvs, yearlyHome, altHome }) {
+function calcRates(calc) {
     return {
         type: CALC_RATES,
-        yearlyEv, 
-        altEvs, 
-        yearlyHome, 
-        altHome
+        calc
     }
 }
 
@@ -17,8 +14,8 @@ export function handleCalcResults({rate, mileage, hours}) {
     return (dispatch) => {
         dispatch(showLoading)
         return(calcResults({rate, mileage, hours}))
-        .then(({yearlyEv, altEvs, yearlyHome, altHome}) => {
-            dispatch(calcRates({yearlyEv, altEvs, yearlyHome, altHome}))
+        .then((results) => {
+            dispatch(calcRates(results))
             dispatch(hideLoading())
         })
     }
