@@ -73,14 +73,14 @@ export function calcResults({rate, mileage, hours}){
     return new Promise((res, rej) => {
         const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
         const daysNeeded = yearlyHoursNeeded/(hours.length) //num days customer needs to follow charging schedule each year
-        const yearlyEv = {[rate]: rateOptions[rate].evDaily(hours) * daysNeeded}
-        const yearlyHome = {[rate]: rateOptions[rate].homeLoad}
+        const yearlyEv = {[rate]: parseFloat((rateOptions[rate].evDaily(hours) * daysNeeded).toFixed(2))}
+        const yearlyHome = {[rate]: parseFloat((rateOptions[rate].homeLoad).toFixed(2))}
         const altKeys = Object.keys(rateOptions).filter((option) => option !== rate)
         let altEvs = {}
         let altHomes = {}
         altKeys.forEach((key) => {
-            altEvs[key] = rateOptions[key].evDaily(hours) * daysNeeded
-            altHomes[key] = rateOptions[key].homeLoad
+            altEvs[key] = parseFloat((rateOptions[key].evDaily(hours) * daysNeeded).toFixed(2))
+            altHomes[key] = parseFloat((rateOptions[key].homeLoad).toFixed(2))
         })
         setTimeout(() => {
         calc = {

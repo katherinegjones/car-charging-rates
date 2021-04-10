@@ -9,12 +9,20 @@ export default class ChargingHours extends Component {
         this.props.handleSelect(hour)
     }
      render(){
+        const { hours } = this.props
+        const defaultStyle={}
+        const selectedStyle={}
         return(
             <div className='hours-main'>
                 <div className='am-hours'>
                     {[...Array(12).keys()].map((key) => {
                         return (
-                        <button key={key} id={key} onClick={(event) => this.onSelect(event, false)}>
+                        <button 
+                            key={key} 
+                            id={key} 
+                            onClick={(event) => this.onSelect(event, false)}
+                            style={hours.includes(key) ? selectedStyle : defaultStyle}
+                            >
                             {key > 0 
                             ? key < 11 
                             ? `${key}AM - ${key + 1}AM`
@@ -28,7 +36,11 @@ export default class ChargingHours extends Component {
                 <div className='pm-hours'>
                     {[...Array(12).keys()].map((key) => {
                         return (
-                        <button key={key} id={key} onClick={(event) => this.onSelect(event, true)}>
+                        <button key={key} 
+                            id={key} 
+                            onClick={(event) => this.onSelect(event, false)}
+                            style={hours.includes(key) ? selectedStyle : defaultStyle}
+                            >
                             {key > 0 
                             ? key < 11 
                             ? `${key}PM - ${key + 1}PM`

@@ -87,7 +87,7 @@ class InputForm extends Component {
                     />
                 </div>
                 <p>{formatMiles(monthlyMiles)}</p>
-                <ChargingHours handleSelect={this.handleSelectHour}/>
+                <ChargingHours handleSelect={this.handleSelectHour} hours={this.state.hours}/>
                     <button disabled={rateOption === '' | hours.length === 0} onClick={this.onSubmit}>Submit</button>
 
             </div>

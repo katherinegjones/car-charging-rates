@@ -66,7 +66,7 @@ class RateCompare extends Component {
                     <p>{`At your current rate, your total electrical bill would be $${cost/12} monthly`}</p>
                     {cost > minAltCost 
                     ? <p>{`You could save $${(cost - minAltCost)/12} monthly by switching to ${cheapestAltRate}(${this.props.rates[cheapestAltRate].description})`}</p>
-                    : <p>{`This plan will save you at least $${minAltCost - cost} monthly`}</p>}    
+                    : <p>{`This plan will save you at least $${(minAltCost - cost)/12} monthly`}</p>}    
                 </div> 
             </div>
         )
