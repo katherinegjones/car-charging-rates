@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import { CanvasJSChart } from 'canvasjs-react-charts'
+import { Link } from 'react-router-dom'
 
 class RateCompare extends Component {
     
@@ -65,9 +66,10 @@ class RateCompare extends Component {
                 <div className='rate-compare-text'>
                     <p>{`At your current rate, your total electrical bill would be $${cost/12} monthly`}</p>
                     {cost > minAltCost 
-                    ? <p>{`You could save $${(cost - minAltCost)/12} monthly by switching to ${cheapestAltRate}(${this.props.rates[cheapestAltRate].description})`}</p>
-                    : <p>{`This plan will save you at least $${(minAltCost - cost)/12} monthly`}</p>}    
-                </div> 
+                    ? <p>{`You could save $${parseFloat((((cost - minAltCost)/12).toFixed(2)))} monthly by switching to ${cheapestAltRate}(${this.props.rates[cheapestAltRate].description})`}</p>
+                    : <p>{`This plan will save you at least $${parseFloat((((minAltCost - cost))/12).toFixed(2))} monthly`}</p>}    
+                </div>
+                <Link to='/'>Go back</Link> 
             </div>
         )
     }
