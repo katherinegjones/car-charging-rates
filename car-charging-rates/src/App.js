@@ -3,7 +3,7 @@ import './App.css';
 import InputForm from './components/InputForm'
 import RateCompare from './components/RateCompare'
 import { getRateOptions } from './utils/_DATA'
-import { BrowserRouter as Router, Route } from 'react-router-dom' 
+import { Route } from 'react-router-dom' 
 
 
 class App extends Component {
@@ -35,7 +35,6 @@ class App extends Component {
 
   render(){
     return (
-      <Router>
         <div className='App'>
           <Route exact path ='/' render={() => {
             <InputForm rateOptions={this.state.rateOptions}/>
@@ -45,7 +44,7 @@ class App extends Component {
           }}/>
                
         </div>
-      </Router>
+      
     );
     }
 }
