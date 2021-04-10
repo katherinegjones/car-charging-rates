@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import Slider from 'react-rangeslider'
 import ChargingHours from './ChargingHours'
+import 'react-range-slider/lib/index.css'
 import { Link } from 'react-router-dom'
 
 export default class InputForm extends Component {
@@ -46,11 +47,11 @@ export default class InputForm extends Component {
                     max={5000}
                     step={100}
                     value={monthlyMiles}
-                    handleLabel={monthlyMiles}
+                    handleLabel={monthlyMiles.toString()}
                     format={formatMiles}
                     onChange={this.handleChangeMiles}
                 />
-                <p>{formatMiles}</p>
+                <p>{formatMiles(monthlyMiles)}</p>
                 <ChargingHours handleSelect={this.handleSelectHour}/>
                 <Link to='/results'>
                     <button disabled={chargeRate === '' | hours.length === 0}>Submit</button>

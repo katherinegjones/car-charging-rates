@@ -34,17 +34,16 @@ export function calcResults(rate, mileage, hours){
     return new Promise((res, rej) => {
         const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
         const ratio = yearlyHoursNeeded/(hours * 365) //ratio of kwh needed vs. actual hours charging
-        const yearlyCost = rateOptions[rate].evLoad(hours) * ratio
-        const altCosts = Object.keys(rateOptions).filter((option) => option !== rate).map((option) => {
-            const obj = {}
-            obj[option] = option.evLoad(hours) * ratio
-            return obj
+        const yearlyEv = {[rate]: rateOptions[rate].evLoad(hours) * ratio}
+        const altKeys = Object.keys(rateOptions).filter((option) => option !== rate)
+        let altEvs = {}
+        altKeys.forEach((key) => {
+            altEvs[key] = rateOptions[key].evLoad(hours) * ratio
         })
-            
         setTimeout(() => {
         const costOptions = {
-            yearlyCost,
-            altCosts
+            yearlyEv: yearlyEv,
+            altEvs: altEvs
         }
         res(costOptions)
         }, 1000)
