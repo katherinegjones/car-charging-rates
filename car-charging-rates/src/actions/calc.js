@@ -3,10 +3,13 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 export const CALC_RATES = 'CALC_RATES'
 
-function calcRates(calcs) {
+function calcRates({ yearlyEv, altEvs, yearlyHome, altHome }) {
     return {
         type: CALC_RATES,
-        calcs
+        yearlyEv, 
+        altEvs, 
+        yearlyHome, 
+        altHome
     }
 }
 
