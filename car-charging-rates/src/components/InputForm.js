@@ -47,6 +47,7 @@ class InputForm extends Component {
         const styleSelected = {}
         const styleUnselect = {} 
         const formatMiles = value => value + 'miles/month'
+        console.log(rateOptions)
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
