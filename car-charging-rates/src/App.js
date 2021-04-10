@@ -13,6 +13,10 @@ class App extends Component {
 
   }
   componentDidMount(){
+    this.updateRateOptions()
+  }
+
+  updateRateOptions = () => {
     getRateOptions()
     .then((rateOptions) =>{
       console.log(rateOptions)
