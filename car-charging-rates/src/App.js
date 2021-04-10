@@ -19,7 +19,7 @@ class App extends Component {
   updateRateOptions = () => {
     getRateOptions()
     .then((rateOptions) =>{
-      console.log(rateOptions)
+      console.log(rateOptions.rateB.homeLoad)
       this.setState(() => ({
         rateOptions
       }))
