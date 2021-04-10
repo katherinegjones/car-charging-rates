@@ -28,7 +28,7 @@ export default class ChargingHours extends Component {
                 <div className='pm-hours'>
                     {[...Array(12).keys()].map((key) => {
                         return (
-                        <button id={key} onClick={(event) => this.onSelect(event, true)}>
+                        <button key={key} id={key} onClick={(event) => this.onSelect(event, true)}>
                             {key > 0 
                             ? key < 11 
                             ? `${key}PM - ${key + 1}PM`

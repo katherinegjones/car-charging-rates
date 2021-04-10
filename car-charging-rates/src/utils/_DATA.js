@@ -15,7 +15,7 @@ let rateOptions = {
             const peak = modded > 18 && modded <= 24 
             const cost = peak ? curr * .2 : curr * .08
             return cost + accum 
-        }, 0),
+        }, 0).toFixed(2),
         evLoad: hours => hours.reduce((accum, curr) => {
             const peak = curr > 18 && curr <= 24
             const cost = peak ? curr * .2 : curr * .08
@@ -35,17 +35,22 @@ export function calcResults(rate, mileage, hours){
         const yearlyHoursNeeded = .3 * mileage * 12 //kWh needed per year according to driving habits
         const ratio = yearlyHoursNeeded/(hours * 365) //ratio of kwh needed vs. actual hours charging
         const yearlyEv = {[rate]: rateOptions[rate].evLoad(hours) * ratio}
+        const yearlyHome = {[rate]: rateOptions[rate].homeLoad}
         const altKeys = Object.keys(rateOptions).filter((option) => option !== rate)
         let altEvs = {}
+        let altHomes = {}
         altKeys.forEach((key) => {
             altEvs[key] = rateOptions[key].evLoad(hours) * ratio
+            altHomes[key] = rateOptions[key].homeLoad
         })
         setTimeout(() => {
-        const costOptions = {
+        const calcs = {
             yearlyEv: yearlyEv,
-            altEvs: altEvs
+            altEvs: altEvs,
+            yearlyHome: yearlyHome,
+            altHomes: altHomes
         }
-        res(costOptions)
+        res(calcs)
         }, 1000)
     })
 
