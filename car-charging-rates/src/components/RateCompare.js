@@ -4,18 +4,18 @@ import { CanvasJSChart } from 'canvasjs-react-charts'
 
 class RateCompare extends Component {
     render() {
-        const { calcs } = this.props
-        const formattedHomeData = Object.keys(calcs.altHomes).map((key) => {
+        const { calc } = this.props
+        const formattedHomeData = Object.keys(calc.altHomes).map((key) => {
             return {
-                y: calcs.altHomes[key], label: key
+                y: calc.altHomes[key], label: key
             }
-        }).concat({y: Object.values(calcs.yearlyHome)[0], label: `${Object.keys(calcs.yearlyHome)[0]}(Your chosen rate)`})
+        }).concat({y: Object.values(calc.yearlyHome)[0], label: `${Object.keys(calc.yearlyHome)[0]}(Your chosen rate)`})
 
-        const formattedEvData = Object.keys(calcs.altEvs).map((key) => {
+        const formattedEvData = Object.keys(calc.altEvs).map((key) => {
             return {
-                y: calcs.altEvs[key], label: key
+                y: calc.altEvs[key], label: key
             }
-        }).concat({y: Object.values(calcs.yearlyEv)[0], label: `${Object.keys(calcs.yearlyEv)[0]}(Your chosen rate)`})
+        }).concat({y: Object.values(calc.yearlyEv)[0], label: `${Object.keys(calc.yearlyEv)[0]}(Your chosen rate)`})
         const options = {
             title: {
                 text: "Yearly Costs Compared"
@@ -47,9 +47,9 @@ class RateCompare extends Component {
     }
 }
 
-function mapStateToProps({ calcs }){
+function mapStateToProps({ calc }){
     return {
-        calcs
+        calc
     }
 }
 
