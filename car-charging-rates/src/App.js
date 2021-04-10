@@ -7,6 +7,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
 class App extends Component {
+  state = {
+    rateOptions: {},
+    calcs: {}
+
+  }
   componentDidMount(){
     getRateOptions()
     .then((rateOptions) =>{
@@ -18,31 +23,21 @@ class App extends Component {
     )
   }
 
-  handleSubmit = (yearlyEv, altEvs, yearlyHome, altHomes) => {
+  handleSubmit = (calcs) => {
     this.setState(() => ({
-      ...this.state,
-      yearlyEv,
-      altEvs,
-      yearlyHome,
-      altHomes
+      calcs
     }))
   }
 
   render(){
-    const { yearlyEv, altEvs, yearlyHome, altHomes } = this.state
     return (
       <Router>
-        <div className="App">
+        <div className='App'>
           <Route exact path ='/' render={() => {
-            <InputForm rateOptions={this.state ? this.state.rateOptions : null}/>
+            <InputForm rateOptions={this.state.rateOptions}/>
           }}/>
           <Route exact path='/results' render={() => {
-            <RateCompare 
-              yearlyEv={yearlyEv}
-              altEvs={altEvs}
-              yearlyHome={yearlyHome}
-              altHomes={altHomes}
-            />
+            <RateCompare calcs={this.state.calcs}/>
           }}/>
                
         </div>
