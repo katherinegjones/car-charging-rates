@@ -40,9 +40,11 @@ class InputForm extends Component {
         const { rateOption, monthlyMiles, hours } = this.state
 
         this.props.dispatch(handleCalcResults({rate: rateOption, mileage: monthlyMiles, hours}))
-        this.setState(() => ({
-            toResults: true
-        }))
+        .then(() => {
+            this.setState(() => ({
+                toResults: true
+            }))
+        })
     }
 
     render(){
