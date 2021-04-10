@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import Slider from 'react-rangeslider'
 import ChargingHours from './ChargingHours'
-import 'react-range-slider/lib/index.css'
+//import 'react-range-slider/lib/index.css'
 import { Link } from 'react-router-dom'
 
 export default class InputForm extends Component {
@@ -35,6 +35,7 @@ export default class InputForm extends Component {
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
+
                 <div className='rate-selection'>
                     <h3>Rate A: $0.15/kWh</h3>
                 </div>
