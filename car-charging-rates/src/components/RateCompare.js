@@ -10,6 +10,7 @@ class RateCompare extends Component {
 
     render() {
         const { calc } = this.props
+        console.log("Calc object upon loading results: ", calc)
         const formattedHomeData = Object.keys(calc.altHomes).map((key) => {
             return {
                 y: calc.altHomes[key], label: key
