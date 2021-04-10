@@ -4,10 +4,10 @@ import { showLoading, hideLoading } from 'react-redux-loading-bar'
 export const ADD_RATE = 'ADD_RATE'
 export const RECEIVE_RATES = 'RECEIVE_RATES'
 
-function receiveRates(rates) {
+function receiveRates(rateOptions) {
     return {
         type: RECEIVE_RATES,
-        rates
+        rateOptions
     }
 }
 

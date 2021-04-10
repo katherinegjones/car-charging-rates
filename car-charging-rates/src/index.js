@@ -9,9 +9,10 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 
 const store = createStore(reducer, middleware)
+
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <App />
   </Provider>,
   document.getElementById('root')
 );

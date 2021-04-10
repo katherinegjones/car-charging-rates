@@ -3,7 +3,7 @@ import './App.css';
 import InputForm from './components/InputForm'
 import RateCompare from './components/RateCompare'
 import { handleReceiveRates } from './actions/rates'
-import { BrowserRouter as Router, Route, } from 'react-router-dom' 
+import { BrowserRouter as Router, Route } from 'react-router-dom' 
 import LoadingBar from 'react-redux-loading-bar'
 import { connect } from 'react-redux'
 

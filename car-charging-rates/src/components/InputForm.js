@@ -43,14 +43,22 @@ class InputForm extends Component {
 
     render(){
         const { rateOption, monthlyMiles, hours } = this.state
-        const { rateOptions } = this.props 
+        const { rateOptions } = this.props
+        const styleSelected = {}
+        const styleUnselect = {} 
         const formatMiles = value => value + 'miles/month'
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
                 {Object.keys(rateOptions).map((option) => {
                     return (
-                        <div key={option} id={option} className='rate-selection' onClick={this.handleSelectRate}>
+                        <div 
+                        key={option} 
+                        id={option} 
+                        className='rate-selection' 
+                        onClick={this.handleSelectRate}
+                        style={rateOption === option ? styleSelected : styleUnselect}
+                        >
                             <h3>{`${rateOptions[option].name}: ${rateOptions[option].description}`}</h3>
 
                         </div>
