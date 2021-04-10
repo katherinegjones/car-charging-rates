@@ -1,5 +1,6 @@
 import { Component, Fragment } from 'react';
 import './App.css';
+import './stylesheets/index.css'
 import InputForm from './components/InputForm'
 import RateCompare from './components/RateCompare'
 import { handleReceiveRates } from './actions/rates'
@@ -17,9 +18,9 @@ class App extends Component {
     const loadingStyle = {
       zIndex: '1',
       height: '10px',
-      background: 'linear-gradient(to right, #0066cc 0%, #00ffff 100%)',
-      borderRadiusTopRight: '5px',
-      borderRadiusBottomRight: '5px'
+      background: 'linear-gradient(to right, #121922 0%, #636363 100%)',
+      borderBottomLeftRadius: '5px',
+      borderBottomRightRadius: '5px'
   }
     return (
       <Router>

@@ -1,17 +1,22 @@
 import { Component } from 'react'
+import '../stylesheets/input-form.css'
 
 export default class ChargingHours extends Component {
     onSelect = (e, isPM) => {
         e.preventDefault()
 
-        const hour = isPM === true ? e.target.id + 12 : e.target.id
+        const hour = isPM === true ? parseInt(e.target.id) + 12 : parseInt(e.target.id)
 
         this.props.handleSelect(hour)
     }
      render(){
         const { hours } = this.props
         const defaultStyle={}
-        const selectedStyle={color: 'green'}
+        const selectedStyle={
+            color: '#f89439',
+            backgroundColor: '#121922',
+            border: '3px solid white', 
+            boxShadow: '0px 0px 5px #636363'}
         return(
             <div className='hours-main'>
                 <div className='am-hours'>
@@ -38,8 +43,8 @@ export default class ChargingHours extends Component {
                         return (
                         <button key={key} 
                             id={key} 
-                            onClick={(event) => this.onSelect(event, false)}
-                            style={hours.includes(key) ? selectedStyle : defaultStyle}
+                            onClick={(event) => this.onSelect(event, true)}
+                            style={hours.includes(key + 12) ? selectedStyle : defaultStyle}
                             >
                             {key > 0 
                             ? key < 11 

@@ -1,0 +1,15 @@
+@media (min-width: 768px) {  
+
+    .rate-compare-chart {
+        width: 70%;
+        margin: auto;
+    
+    }
+}
+
+@media (min-width: 1224px) {
+    .rate-compare-chart {
+        width: 50%;
+        margin: auto;
+    }
+}
