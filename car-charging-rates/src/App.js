@@ -33,9 +33,9 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({ rateOptions}) {
+function mapStateToProps({ rates }) {
   return {
-    loading: rateOptions === undefined
+    loading: Object.keys(rates).length === 0
   }
 }
 export default connect(mapStateToProps)(App);
