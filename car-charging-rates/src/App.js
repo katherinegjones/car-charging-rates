@@ -36,9 +36,7 @@ class App extends Component {
   render(){
     return (
         <div className='App'>
-          <Route exact path ='/' render={() => {
-            <InputForm rateOptions={this.state.rateOptions}/>
-          }}/>
+          <Route exact path ='/' component={InputForm}/>
           <Route exact path='/results' render={() => {
             <RateCompare calcs={this.state.calcs}/>
           }}/>
