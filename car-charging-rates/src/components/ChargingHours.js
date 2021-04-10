@@ -11,7 +11,7 @@ export default class ChargingHours extends Component {
      render(){
         const { hours } = this.props
         const defaultStyle={}
-        const selectedStyle={}
+        const selectedStyle={color: 'green'}
         return(
             <div className='hours-main'>
                 <div className='am-hours'>
