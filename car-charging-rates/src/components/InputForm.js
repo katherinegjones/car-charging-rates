@@ -43,15 +43,15 @@ class InputForm extends Component {
 
     render(){
         const { rateOption, monthlyMiles, hours } = this.state
-        const { rateOptions } = this.props
+        const { rates } = this.props
         const styleSelected = {}
         const styleUnselect = {} 
         const formatMiles = value => value + 'miles/month'
-        console.log(rateOptions)
+        console.log(rates)
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
-                {/*{Object.keys(rateOptions).map((option) => {
+                {Object.keys(rates).map((option) => {
                     return (
                         <div 
                         key={option} 
@@ -60,18 +60,18 @@ class InputForm extends Component {
                         onClick={this.handleSelectRate}
                         style={rateOption === option ? styleSelected : styleUnselect}
                         >
-                            <h3>{`${rateOptions[option].name}: ${rateOptions[option].description}`}</h3>
+                            <h3>{`${rates[option].name}: ${rates[option].description}`}</h3>
 
                         </div>
                         )
-                })}*/}
-                
+                })}
+                {/* 
                 <div className='rate-selection'>
                     <h3>Rate A: $0.15/kWh</h3>
                 </div>
                 <div className='rate-selection'>
                     <h3>Rate B: $0.20/kWh peak hours (12pm - 6pm), $0.08 offpeak</h3>
-                </div>
+                </div>*/}
                 <h2>What is your average monthly miles driven?</h2>
                 <Slider 
                     min={100}
@@ -93,9 +93,9 @@ class InputForm extends Component {
     }
 }
 
-function mapStateToProps({ rateOptions }) {
+function mapStateToProps({ rates }) {
     return{
-        rateOptions
+        rates
     }
 }
 
