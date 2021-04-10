@@ -10,12 +10,7 @@ export default function calc(state = {}, action) {
         case CALC_RATES:
             return {
                 ...state,
-                calc: {
-                    yearlyEv: action.yearlyEv,
-                    altEvs: action.altEvs,
-                    yearlyHome: action.yearlyHome, 
-                    altHomes: action.altHomes
-                }
+                ...action.calc
             }
         default:
             return state

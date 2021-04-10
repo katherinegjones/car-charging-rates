@@ -18,13 +18,10 @@ export function handleGetCalc() {
         .then((results) => receiveCalc(results))
     }
 }
-function calcRates({ yearlyEv, altEvs, yearlyHome, altHomes }) {
+function calcRates(calc) {
     return {
         type: CALC_RATES,
-        yearlyEv,
-        altEvs,
-        yearlyHome,
-        altHomes
+        calc
     }
 }
 
