@@ -14,14 +14,14 @@ class InputForm extends Component {
         toResults: false
     }
 
-    handleSelectRate = (e) => {
-        if (e.target.tagName === 'H3'){
+    handleSelectRate = (e) =>{ 
+        e.preventDefault()
             //console.log("Rate selected: ", e.currentTarget.id)
             this.setState(() => ({
                 rateOption: e.target.id
             }))
         }
-    }
+    
 
     handleSelectHour = (hour) => {
         console.log("Hour selected: ", hour)
