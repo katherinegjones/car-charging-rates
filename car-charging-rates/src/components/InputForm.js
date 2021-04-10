@@ -15,6 +15,7 @@ class InputForm extends Component {
 
     handleSelectRate = (e) => {
         if (e.target.tagName === 'H3'){
+            console.log("Rate selected: ", e.target.id)
             this.setState(() => ({
                 rateOption: e.target.id
             }))
@@ -89,4 +90,4 @@ function mapStateToProps({ rateOptions }) {
     }
 }
 
-export default connect()(InputForm)
+export default connect(mapStateToProps)(InputForm)
