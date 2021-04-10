@@ -16,6 +16,7 @@ export function handleReceiveRates() {
         dispatch(showLoading())
         return getRateOptions()
         .then((results) => {
+            console.log("logging results in reducer: ", results)
             dispatch(receiveRates(results))
             dispatch(hideLoading())
         })
