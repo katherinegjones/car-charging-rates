@@ -15,7 +15,7 @@ export function handleReceiveRates() {
     return(dispatch) => {
         dispatch(showLoading())
         return getRateOptions()
-        .then(({ results }) => {
+        .then((results) => {
             dispatch(receiveRates(results))
             dispatch(hideLoading())
         })
