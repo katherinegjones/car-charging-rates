@@ -30,7 +30,7 @@ class RateCompare extends Component {
         const minAltCost = Math.min(...Object.values(altTotals))
         const cheapestAltRate = Object.keys(altTotals).find((key) => altTotals[key] === minAltCost)
 
-        const cost = yearlyEv + yearlyHome
+        const cost = Object.values(yearlyEv)[0] + Object.values(yearlyHome)[0]
 
         console.log("Cheapest alternate cost: ", minAltCost)
 
