@@ -34,8 +34,6 @@ class RateCompare extends Component {
 
         const cost = Object.values(yearlyEv)[0] + Object.values(yearlyHome)[0]
 
-        console.log("Cheapest alternate cost: ", minAltCost)
-
         const options = {
             title: {
                 text: "Yearly Costs Compared"
@@ -67,7 +65,7 @@ class RateCompare extends Component {
                 <div className='rate-compare-text'>
                     <p>{`At your current rate, your total electrical bill would be $${(cost/12).toFixed(2)} monthly`}</p>
                     {cost > minAltCost 
-                    ? <p>{`You could save $${((cost - minAltCost)/12).toFixed(2)} monthly by switching to ${cheapestAltRate}(${this.props.rates[cheapestAltRate].description})`}</p>
+                    ? <p>{`You could save $${((cost - minAltCost)/12).toFixed(2)} monthly by switching to ${cheapestAltRate} (${this.props.rates[cheapestAltRate].description})`}</p>
                     : <p>{`Your current plan is your best option, as it will save you at least $${((minAltCost - cost)/12).toFixed(2)} monthly`}</p>}    
                 </div>
                 <Link to='/'>Go back</Link> 

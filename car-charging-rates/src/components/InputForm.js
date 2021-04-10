@@ -39,6 +39,7 @@ class InputForm extends Component {
         e.preventDefault()
 
         const { rateOption, monthlyMiles, hours } = this.state
+        console.log("Hours selected: ", hours)
 
         this.props.dispatch(handleCalcResults({rate: rateOption, mileage: monthlyMiles, hours}))
         .then(() => {
@@ -83,6 +84,7 @@ class InputForm extends Component {
                             )
                     })}
                 </div>
+                <hr />
                 <h2>On average, how many miles do you drive monthly?</h2>
                 <div className='range-slider'>
                     <Slider 
@@ -96,6 +98,7 @@ class InputForm extends Component {
                     />
                 </div>
                 <p className='monthly-miles-display'>{formatMiles(monthlyMiles)}</p>
+                <hr />
                 <div className='charging-hours-container'>
                     <h2>During which hours of the day do you typically plan to charge your electric vehicle?</h2>
                     <p>(Select as many hours as you like)</p>
