@@ -15,9 +15,9 @@ class InputForm extends Component {
 
     handleSelectRate = (e) => {
         if (e.target.tagName === 'H3'){
-            console.log("Rate selected: ", e.target.id)
+            console.log("Rate selected: ", e.target.innerHTML)
             this.setState(() => ({
-                rateOption: e.target.id
+                rateOption: e.target.innerHTML
             }))
         }
     }

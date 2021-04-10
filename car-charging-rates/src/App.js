@@ -14,10 +14,15 @@ class App extends Component {
   }
 
   render(){
+    const loadingStyle = {
+      zIndex: '1',
+      height: '10px',
+      background: 'linear-gradient(to right, #0066cc 0%, #00ffff 100%)'
+  }
     return (
       <Router>
         <Fragment>
-          <LoadingBar />
+          <LoadingBar style={loadingStyle}/>
           <div>
             {this.props.loading === true 
             ? null
