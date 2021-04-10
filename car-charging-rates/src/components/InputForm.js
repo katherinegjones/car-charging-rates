@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Slider from 'react-rangeslider'
 import ChargingHours from './ChargingHours'
@@ -10,14 +10,15 @@ class InputForm extends Component {
     state = {
         rateOption: '',
         monthlyMiles: 1000,
-        hours: []
+        hours: [],
+        toResults: false
     }
 
     handleSelectRate = (e) => {
         if (e.target.tagName === 'H3'){
             console.log("Rate selected: ", e.currentTarget.id)
             this.setState(() => ({
-                rateOption: e.target.innerHTML.slice(5)
+                rateOption: e.currentTarget.id
             }))
         }
     }
@@ -39,15 +40,20 @@ class InputForm extends Component {
         const { rateOption, monthlyMiles, hours } = this.state
 
         handleCalcResults({rate: rateOption, mileage: monthlyMiles, hours})
+        this.setState(() => ({
+            toResults: true
+        }))
     }
 
     render(){
-        const { rateOption, monthlyMiles, hours } = this.state
+        const { rateOption, monthlyMiles, hours, toResults } = this.state
         const { rates } = this.props
         const styleSelected = {}
         const styleUnselect = {} 
         const formatMiles = value => value + 'miles/month'
-        console.log(rates)
+        if (toResults === true){
+            return <Redirect to='/results'/>
+        }
         return(
             <div className='input-form-main'>
                 <h2>Please select your current electrical rate:</h2>
@@ -65,13 +71,7 @@ class InputForm extends Component {
                         </div>
                         )
                 })}
-                {/* 
-                <div className='rate-selection'>
-                    <h3>Rate A: $0.15/kWh</h3>
-                </div>
-                <div className='rate-selection'>
-                    <h3>Rate B: $0.20/kWh peak hours (12pm - 6pm), $0.08 offpeak</h3>
-                </div>*/}
+                
                 <h2>What is your average monthly miles driven?</h2>
                 <Slider 
                     min={100}
@@ -84,9 +84,7 @@ class InputForm extends Component {
                 />
                 <p>{formatMiles(monthlyMiles)}</p>
                 <ChargingHours handleSelect={this.handleSelectHour}/>
-                <Link to='/results'>
                     <button disabled={rateOption === '' | hours.length === 0}>Submit</button>
-                </Link>
 
             </div>
         )
